@@ -1,0 +1,113 @@
+# =============================================================================
+# Gradle
+# =============================================================================
+# Local Gradle cache, daemon state, and incremental build metadata.
+.gradle/
+# Build outputs (compiled classes, jars, plugin zips, instrumentation, etc.).
+build/
+# Project-level Gradle config that doesn't belong in version control.
+gradle-app.setting
+!gradle-wrapper.jar
+!gradle-wrapper.properties
+
+# =============================================================================
+# IntelliJ Platform Gradle Plugin
+# =============================================================================
+# Sandbox IDE, downloaded SDK shards, and verifier work directories created by
+# the `org.jetbrains.intellij.platform` plugin.
+.intellijPlatform/
+
+# =============================================================================
+# IDE — IntelliJ / JetBrains
+# =============================================================================
+# Workspace files, caches, and per-user IDE state. The `.idea` folder mixes
+# project-wide settings (sometimes worth sharing) with per-user state (never).
+# The default — and what most JetBrains plugin templates ship with — is to
+# ignore the whole folder; reintroduce specific files with `!` if needed.
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# =============================================================================
+# IDE — VS Code (for contributors who use it)
+# =============================================================================
+.vscode/
+.history/
+
+# =============================================================================
+# IDE — Eclipse (rare, but cheap to cover)
+# =============================================================================
+.classpath
+.project
+.settings/
+bin/
+
+# =============================================================================
+# Kotlin / JVM
+# =============================================================================
+# Compiled output that occasionally escapes the `build/` folder.
+*.class
+# Kotlin/Native and incremental compilation caches.
+.kotlin/
+# Hotspot crash logs.
+hs_err_pid*
+replay_pid*
+
+# =============================================================================
+# Logs & runtime
+# =============================================================================
+*.log
+logs/
+
+# =============================================================================
+# Secrets — never commit these
+# =============================================================================
+# Marketplace publish tokens, signing keys, certificate keystores. Read via
+# environment variables or a local .env that is itself ignored.
+.env
+.env.*
+!.env.example
+*.token
+secrets.properties
+local.properties
+# Plugin-signing material (see jetbrains.com/help/idea/plugin-signing.html).
+*.pem
+*.p12
+*.jks
+*.keystore
+chain.crt
+private.pem
+private_encrypted.pem
+
+# =============================================================================
+# OS junk
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# =============================================================================
+# AI assistants — per-user session data
+# =============================================================================
+.claude/
+.aider*
+.cursor/
+
+# =============================================================================
+# Misc
+# =============================================================================
+# Backup and swap files left behind by editors.
+*.bak
+*.swp
+*.swo
+*~
+# Local notes / scratch directories that occasionally appear during dev.
+TODO.local.md
+scratch/

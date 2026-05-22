@@ -1,0 +1,92 @@
+<!--
+    Plugin descriptor for "Antigravity CLI Opener".
+    Reference: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html
+
+    What this plugin does:
+      Registers a single action that opens the IDE Terminal tool window and runs the
+      `agr` command (Google Antigravity CLI) in a fresh shell tab. Zero configuration,
+      zero cost, no telemetry.
+-->
+<idea-plugin>
+
+    <!--
+        Fully-qualified plugin ID. MUST remain stable across versions — JetBrains
+        Marketplace uses it as the primary key for the plugin listing.
+    -->
+    <id>bynarig.AntigravityCLIOpener</id>
+
+    <!-- Human-readable name shown on the Marketplace and in Settings → Plugins. -->
+    <name>Antigravity CLI Opener</name>
+
+    <!-- Vendor block: shown on the plugin page; email is contact for marketplace moderation. -->
+    <vendor email="yaroslav.shabelnyk@gmail.com" url="https://github.com/bynarig">bynarig</vendor>
+
+    <!--
+        Marketplace description. HTML allowed (CDATA wrapper required). Keep it short,
+        factual, and focused on the value-add per JetBrains Marketplace guidelines.
+    -->
+    <description><![CDATA[
+        <p><b>Antigravity CLI Opener</b> launches Google Antigravity from your JetBrains IDE
+        with one click or one shortcut.</p>
+
+        <p>The plugin adds a single action — <b>Tools → Open Antigravity CLI</b>
+        (default shortcut <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd>) — that:</p>
+        <ul>
+            <li>Opens (or focuses) the built-in Terminal tool window.</li>
+            <li>Creates a fresh shell tab named "Antigravity" in the project root.</li>
+            <li>Runs the <code>agr</code> command for you.</li>
+        </ul>
+
+        <p>Works in IntelliJ IDEA, PyCharm, WebStorm, GoLand, Rider, CLion, RustRover,
+        PhpStorm, and every other IDE built on the IntelliJ Platform. 100% free, no
+        telemetry, no network calls.</p>
+
+        <p><b>Requirement:</b> the <code>agr</code> binary must be on your shell's
+        <code>PATH</code>. See the Antigravity docs for installation instructions.</p>
+    ]]></description>
+
+    <!--
+        Compatibility:
+          - `com.intellij.modules.platform` is the base IntelliJ Platform module and is
+            present in every IDE we care about.
+          - `org.jetbrains.plugins.terminal` is the bundled terminal plugin. It ships
+            with every JetBrains IDE, but declaring the dependency is what lets us
+            import `TerminalToolWindowManager` and friends.
+    -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.terminal</depends>
+
+    <!-- Localised UI strings live here. See messages/MyMessageBundle.properties. -->
+    <resource-bundle>messages.MyMessageBundle</resource-bundle>
+
+    <!--
+        Extensions registered against IntelliJ Platform extension points.
+        We register a dedicated notification group so error toasts route cleanly to
+        Settings → Notifications and can be silenced per-user if desired.
+    -->
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="Antigravity CLI Opener"
+                           displayType="BALLOON"
+                           isLogByDefault="true"/>
+    </extensions>
+
+    <!--
+        User-facing actions. The single action is exposed in:
+          - the Tools menu (most discoverable place for "do a thing" commands)
+          - the global keymap, with Ctrl+Alt+G as the default shortcut on every OS
+            (users can remap or remove it via Settings → Keymap).
+    -->
+    <actions>
+        <action id="bynarig.AntigravityCLIOpener.OpenAntigravityCli"
+                class="bynarig.OpenAntigravityCliAction"
+                text="Open Antigravity CLI"
+                description="Open the terminal and run 'agr'"
+                icon="AllIcons.RunConfigurations.TestState.Run">
+            <!-- Surface the action in the main Tools menu. -->
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <!-- Default shortcut – chosen to avoid conflicts with stock JetBrains keymaps. -->
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt G"/>
+        </action>
+    </actions>
+
+</idea-plugin>
